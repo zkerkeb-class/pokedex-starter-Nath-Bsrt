@@ -1,0 +1,94 @@
+/* Style pour la carte Pokémon */
+.pokemon-card {
+    width: 220px;
+    padding: 1.5rem;
+    margin: 10px;
+    border-radius: 15px;
+    background-color: #f9f9f9;
+    border: 15px solid #FFDE00;  /* Bordure jaune autour de la carte */
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    cursor: pointer;  /* Changer le curseur pour indiquer que la carte est cliquable */
+  }
+  
+  /* Effet au survol de la carte */
+  .pokemon-card:hover {
+    transform: translateY(-5px);  /* Légère élévation de la carte */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);  /* Ombre plus marquée */
+  }
+  
+  /* Style du nom du Pokémon */
+  .pokemon-name {
+    color: #333;
+    font-size: 20px;
+    font-weight: bold;
+  }
+  
+  /* Style de l'image du Pokémon */
+  .pokemon-image {
+    width: 200px;
+    height: 200px;
+  }
+  
+  /* Style du conteneur des types de Pokémon */
+  .pokemon-types-container {
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  /* Style du conteneur des statistiques du Pokémon */
+  .pokemon-stats-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  /* Style des boutons */
+  .delete-button {
+    background-color: #ffb3b3;  /* Rouge pastel pour supprimer */
+    color: #fff;
+    padding: 8px 20px;
+    border-radius: 5px;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 5px;
+  }
+  
+  .delete-button:hover {
+    background-color: #ff6666;  /* Rouge plus foncé au survol */
+  }
+  
+  .edit-button {
+    background-color: #d3d3d3;  /* Gris clair pour modifier */
+    color: #333;
+    padding: 8px 20px;
+    border-radius: 5px;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 5px;
+  }
+  
+  .edit-button:hover {
+    background-color: #a9a9a9;  /* Gris légèrement plus foncé au survol */
+  }
+  
+  .save-button {
+    background-color: #3498db;  /* Bleu pour enregistrer */
+    color: #fff;
+    padding: 8px 20px;
+    border-radius: 5px;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+    margin: 5px;
+  }
+  
+  .save-button:hover {
+    background-color: #2980b9;
+  }
+  
