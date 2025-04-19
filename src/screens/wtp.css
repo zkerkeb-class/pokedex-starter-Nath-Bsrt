@@ -1,0 +1,300 @@
+.wtp-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+}
+
+.wtp-container h1 {
+  margin-bottom: 30px;
+  color: #3c5aa6;
+}
+
+/* Styles pour le contrôle de la musique */
+.music-control {
+  margin-bottom: 20px;
+}
+
+.music-button {
+  background-color: #f0f0f0;
+  border: 2px solid #ccc;
+  border-radius: 25px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.music-button:hover {
+  background-color: #e0e0e0;
+}
+
+.music-button.playing {
+  background-color: #3c5aa6;
+  color: white;
+  border-color: #ffcb05;
+}
+
+/* Header du jeu avec score et chronomètre */
+.game-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+  padding: 10px 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.score-display {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #3c5aa6;
+}
+
+.timer-display {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #ff0000;
+}
+
+.pokemon-display {
+  margin: 30px 0;
+}
+
+.pokemon-image {
+  width: 300px;
+  height: 300px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.pokemon-image img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.silhouette img {
+  filter: brightness(0);
+  -webkit-filter: brightness(0);
+}
+
+.options-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  margin-top: 30px;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.option-button {
+  background-color: #ffcb05;
+  color: #3c5aa6;
+  border: 2px solid #3c5aa6;
+  border-radius: 8px;
+  padding: 12px 20px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.option-button:hover {
+  background-color: #3c5aa6;
+  color: #ffcb05;
+}
+
+.pokemon-name {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-top: 20px;
+  color: #ff0000;
+}
+
+.revealed-types {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.revealed-type-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.revealed-type-icon {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 5px;
+}
+
+.revealed-type-name {
+  font-size: 14px;
+  color: #333;
+  font-weight: bold;
+}
+
+/* Écran de démarrage */
+.game-start {
+  background-color: #f8f8f8;
+  border-radius: 15px;
+  padding: 30px;
+  margin: 40px auto;
+  max-width: 600px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.game-start h2 {
+  color: #3c5aa6;
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.game-start p {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+  color: #666;
+}
+
+.start-button {
+  background-color: #ffcb05;
+  color: #3c5aa6;
+  border: none;
+  border-radius: 50px;
+  padding: 15px 40px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.start-button:hover {
+  background-color: #3c5aa6;
+  color: #ffcb05;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.start-button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Écran de fin de jeu */
+.game-over {
+  background-color: #f8f8f8;
+  border-radius: 15px;
+  padding: 30px;
+  margin: 40px auto;
+  max-width: 600px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.game-over h2 {
+  color: #3c5aa6;
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.game-over p {
+  font-size: 1.3rem;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.game-over button {
+  background-color: #3c5aa6;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 25px;
+  margin: 10px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.game-over button:hover {
+  background-color: #ffcb05;
+  color: #3c5aa6;
+}
+
+/* Styles pour le leaderboard */
+.leaderboard {
+  margin-top: 30px;
+  overflow-x: auto;
+}
+
+.leaderboard h3 {
+  color: #3c5aa6;
+  margin-bottom: 15px;
+  font-size: 1.5rem;
+}
+
+.leaderboard table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.leaderboard th, .leaderboard td {
+  padding: 12px 15px;
+  text-align: center;
+  border-bottom: 1px solid #eee;
+}
+
+.leaderboard thead {
+  background-color: #3c5aa6;
+  color: white;
+}
+
+.leaderboard tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.leaderboard tr:hover {
+  background-color: #f0f0f0;
+}
+
+.leaderboard .current-user {
+  background-color: #fffae5;
+  font-weight: bold;
+}
+
+/* Bouton du leaderboard */
+.leaderboard-button {
+  background-color: #3c5aa6;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 12px 25px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.leaderboard-button:hover {
+  background-color: #ffcb05;
+  color: #3c5aa6;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.leaderboard-button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+} 

@@ -1,94 +1,190 @@
 /* Style pour la carte Pokémon */
 .pokemon-card {
-    width: 220px;
-    padding: 1.5rem;
-    margin: 10px;
-    border-radius: 15px;
-    background-color: #f9f9f9;
-    border: 15px solid #FFDE00;  /* Bordure jaune autour de la carte */
-    text-align: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-    cursor: pointer;  /* Changer le curseur pour indiquer que la carte est cliquable */
-  }
-  
-  /* Effet au survol de la carte */
-  .pokemon-card:hover {
-    transform: translateY(-5px);  /* Légère élévation de la carte */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);  /* Ombre plus marquée */
-  }
-  
-  /* Style du nom du Pokémon */
-  .pokemon-name {
-    color: #333;
-    font-size: 20px;
-    font-weight: bold;
-  }
-  
-  /* Style de l'image du Pokémon */
-  .pokemon-image {
-    width: 200px;
-    height: 200px;
-  }
-  
-  /* Style du conteneur des types de Pokémon */
-  .pokemon-types-container {
-    display: flex;
-    justify-content: space-around;
-  }
-  
-  /* Style du conteneur des statistiques du Pokémon */
-  .pokemon-stats-container {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  
-  /* Style des boutons */
-  .delete-button {
-    background-color: #ffb3b3;  /* Rouge pastel pour supprimer */
-    color: #fff;
-    padding: 8px 20px;
-    border-radius: 5px;
-    font-size: 14px;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin: 5px;
-  }
-  
-  .delete-button:hover {
-    background-color: #ff6666;  /* Rouge plus foncé au survol */
-  }
-  
-  .edit-button {
-    background-color: #d3d3d3;  /* Gris clair pour modifier */
-    color: #333;
-    padding: 8px 20px;
-    border-radius: 5px;
-    font-size: 14px;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin: 5px;
-  }
-  
-  .edit-button:hover {
-    background-color: #a9a9a9;  /* Gris légèrement plus foncé au survol */
-  }
-  
-  .save-button {
-    background-color: #3498db;  /* Bleu pour enregistrer */
-    color: #fff;
-    padding: 8px 20px;
-    border-radius: 5px;
-    font-size: 14px;
-    border: none;
-    cursor: pointer;
-    margin: 5px;
-  }
-  
-  .save-button:hover {
-    background-color: #2980b9;
-  }
+  width: 330px;
+  height: 420px;
+  padding: 15px;
+  margin: 10px;
+  border-radius: 15px;
+  background-color: #ffffff;
+  text-align: center;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Effet au survol de la carte */
+.pokemon-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* Style du numéro ID en grand filigrane */
+.pokemon-card::before {
+  content: "#" attr(data-id);
+  position: absolute;
+  top: 10px;
+  left: 15px;
+  font-size: 20px;
+  font-weight: 600;
+  color: #f0f0f0;
+  z-index: 0;
+  line-height: 1;
+}
+
+/* Style du nom du Pokémon */
+.card-header {
+  position: relative;
+  width: 100%;
+  margin-bottom: 15px;
+  z-index: 1;
+}
+
+.pokemon-name-container {
+  width: 100%;
+  text-align: center;
+  position: relative;
+}
+
+.pokemon-name-wrapper {
+  width: 100%;
+  display: block;
+  text-align: center;
+}
+
+.pokemon-name-edit-wrapper {
+  width: 100%;
+  display: block;
+  text-align: center;
+}
+
+.pokemon-name {
+  font-size: 22px !important;
+  font-weight: 700 !important;
+  color: #000000 !important;
+  text-transform: uppercase !important;
+  display: inline-block !important;
+  text-align: center !important;
+  margin: 0 auto !important;
+}
+
+.pokemon-name-container input {
+  font-size: 18px;
+  font-weight: 700;
+  color: #000000;
+  text-align: center;
+  max-width: 80%;
+  width: auto;
+  margin: 0 auto;
+  border: 1px solid #4285f4;
+  border-radius: 4px;
+  padding: 2px 4px;
+  display: inline-block;
+}
+
+/* Style du bouton favoris */
+.favorite-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: #ddd;
+  cursor: pointer;
+  transition: color 0.3s;
+  z-index: 2;
+}
+
+.favorite-button.is-favorite {
+  color: #FFD700;
+}
+
+/* Style de l'image du Pokémon */
+.pokemon-image {
+  width: 220px !important;
+  height: 220px !important;
+  margin: 0 auto 10px auto;
+  object-fit: contain;
+  position: relative;
+  z-index: 1;
+}
+
+/* Style du conteneur des types de Pokémon */
+.pokemon-types-container {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin: 0 0 10px 0;
+}
+
+
+/* Style de l'image de type */
+.type-image {
+  width: 70px;
+  height: 20px;
+}
+
+/* Style du nom du type */
+.type-name {
+  display: none;
+}
+
+/* Style du conteneur des statistiques */
+.pokemon-stats-container {
+  display: none;
+}
+
+/* Style du conteneur des actions */
+.card-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin-top: 15px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Style des boutons */
+.card-actions button {
+  padding: 5px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 12px;
+  transition: all 0.3s;
+  width: 120px;
+}
+
+.delete-button {
+  background-color: #ff5252;
+  color: white;
+}
+
+.delete-button:hover {
+  background-color: #ff0000;
+}
+
+.edit-button {
+  background-color: #4285f4;
+  color: white !important;
+}
+
+.edit-button:hover {
+  background-color: #2a75f3;
+}
+
+.save-button {
+  background-color: #0f9d58;
+  color: white;
+}
+
+.save-button:hover {
+  background-color: #0b8043;
+}
   

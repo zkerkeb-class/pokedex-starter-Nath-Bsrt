@@ -18,3 +18,137 @@
 .search-bar-container{
   margin-bottom: 20px;
 }
+
+.wtp-button-container {
+  margin-top: 20px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.wtp-button, .add-pokemon-button {
+  background-color: #ffcb05;
+  color: #3c5aa6;
+  border: 2px solid #3c5aa6;
+  border-radius: 8px;
+  padding: 12px 20px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.wtp-button:hover, .add-pokemon-button:hover {
+  background-color: #3c5aa6;
+  color: #ffcb05;
+}
+
+.add-pokemon-button {
+  background-color: #e91e63;
+  color: white;
+  border: 2px solid #c2185b;
+}
+
+.add-pokemon-button:hover {
+  background-color: #c2185b;
+  color: white;
+}
+
+/* Styles pour la pagination */
+.pagination {
+  margin-top: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.pagination-button {
+  background-color: #3c5aa6;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 15px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.pagination-button:hover:not(:disabled) {
+  background-color: #1a2d5e;
+}
+
+.pagination-button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.page-numbers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.page-number {
+  width: 35px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.page-number:hover {
+  background-color: #e0e0e0;
+}
+
+.page-number.active {
+  background-color: #ffcb05;
+  color: #3c5aa6;
+  font-weight: bold;
+  border-color: #3c5aa6;
+}
+
+.pagination-info {
+  width: 100%;
+  text-align: center;
+  margin-top: 10px;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+/* Style pour le message "Aucun résultat" */
+.no-results {
+  width: 100%;
+  text-align: center;
+  padding: 30px;
+  font-size: 1.2rem;
+  color: #666;
+}
+
+/* Styles pour le filtre de favoris */
+.favorites-filter {
+  margin: 15px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.favorites-label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  font-size: 1rem;
+  color: #333;
+}
+
+.favorites-label input {
+  margin-right: 10px;
+  width: 18px;
+  height: 18px;
+}

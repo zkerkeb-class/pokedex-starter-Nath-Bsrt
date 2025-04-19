@@ -1,0 +1,140 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #3c5aa6;
+  padding: 15px 30px;
+  color: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-logo a {
+  color: #ffcb05;
+  font-size: 24px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.navbar-logo a:hover {
+  color: white;
+}
+
+.navbar-links {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.navbar-item {
+  margin: 0 15px;
+}
+
+.navbar-link {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  transition: color 0.3s;
+  position: relative;
+  padding-bottom: 5px;
+}
+
+.navbar-link:hover {
+  color: #ffcb05;
+}
+
+.navbar-link::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #ffcb05;
+  transition: width 0.3s;
+}
+
+.navbar-link:hover::after {
+  width: 100%;
+}
+
+.navbar-auth {
+  display: flex;
+  align-items: center;
+}
+
+.user-menu {
+  display: flex;
+  align-items: center;
+}
+
+.username {
+  margin-right: 15px;
+  font-weight: 500;
+}
+
+.logout-button {
+  background-color: #ff5252;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 15px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.logout-button:hover {
+  background-color: #ff1744;
+}
+
+.login-links {
+  display: flex;
+  gap: 10px;
+}
+
+.login-button, .register-button {
+  padding: 8px 15px;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: all 0.3s;
+}
+
+.login-button {
+  background-color: #ffcb05;
+  color: #3c5aa6;
+  font-weight: bold;
+}
+
+.login-button:hover {
+  background-color: #ffd740;
+}
+
+.register-button {
+  background-color: transparent;
+  border: 2px solid #ffcb05;
+  color: white;
+}
+
+.register-button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    padding: 15px;
+  }
+
+  .navbar-links {
+    margin: 15px 0;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .navbar-auth {
+    width: 100%;
+    justify-content: center;
+    margin-top: 10px;
+  }
+} 

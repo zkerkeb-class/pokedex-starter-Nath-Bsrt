@@ -14,8 +14,19 @@ button {
   cursor: pointer;
 }
 
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
 a {
   cursor: pointer;
+  text-decoration: none;
+  color: #3c5aa6;
+}
+
+a:hover {
+  text-decoration: underline;
 }
 
 .loader:not(.data-container .loader) {
@@ -312,35 +323,6 @@ a {
   gap: 40px;
 }
 
-.pokemon-card {
-  position: relative;
-  display: flex;
-  align-items: center;
-  padding: 3vw 5.5vw;
-  width: 100%;
-  height: 32vw;
-  cursor: pointer;
-  border-radius: 8px;
-  background: currentColor;
-  transition: transform 0.2s;
-  box-shadow: 0 15px 40px 0 currentColor;
-}
-
-.pokemon-card:hover {
-  transform: scale(1.05);
-}
-
-.pokemon-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 25%;
-  width: 30%;
-  height: 30%;
-  background: radial-gradient(rgba(255, 255, 255, 0.1) 2px, #000 2px, transparent 0);
-  background-size: 14px 14px;
-}
-
 .pokeball-bg {
   position: absolute;
   right: 0;
@@ -365,20 +347,51 @@ a {
   -webkit-mask-size: cover;
 }
 
-.pokemon-card > div:first-of-type {
+/* Suppression du style des cartes Pokémon qui est maintenant géré dans pokemonCard/index.css */
+/* Ce style est conservé uniquement pour référence et sera désactivé */
+.pokemon-card-app-style-disabled {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 3vw 5.5vw;
+  width: 100%;
+  height: 32vw;
+  cursor: pointer;
+  border-radius: 8px;
+  background: currentColor;
+  transition: transform 0.2s;
+  box-shadow: 0 15px 40px 0 currentColor;
+}
+
+.pokemon-card-app-style-disabled:hover {
+  transform: scale(1.05);
+}
+
+.pokemon-card-app-style-disabled::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 25%;
+  width: 30%;
+  height: 30%;
+  background: radial-gradient(rgba(255, 255, 255, 0.1) 2px, #000 2px, transparent 0);
+  background-size: 14px 14px;
+}
+
+.pokemon-card-app-style-disabled > div:first-of-type {
   display: flex;
   gap: 2px;
   flex-direction: column;
   justify-content: space-between;
 }
 
-.pokemon-card .id-number {
+.pokemon-card-app-style-disabled .id-number {
   font-size: 0.9rem;
   font-weight: 800;
   color: rgba(0, 0, 0, 0.4);  
 }
 
-.pokemon-card .pokemon-name {
+.pokemon-card-app-style-disabled .pokemon-name {
   font-weight: 600;
   font-size: min(35px, 6.5vw);
   color: #fff;
@@ -388,7 +401,7 @@ a {
   text-transform: capitalize;
 }
 
-.pokemon-card .pokemon-image {
+.pokemon-card-app-style-disabled .pokemon-image {
   position: relative;
   bottom: 20%;
   height: 112%;
@@ -742,17 +755,17 @@ td.range-slide {
     padding: 0.5vw 5vw;
   }
 
-  .pokemon-card {
+  .pokemon-card-app-style-disabled {
     width: 30%;
     height: 200px;
     padding: 1.5vw;
   }
   
-  .pokemon-card .pokemon-name {
+  .pokemon-card-app-style-disabled .pokemon-name {
     font-size: 2.2vw;
   }
 
-  .pokemon-card .pokemon-image {
+  .pokemon-card-app-style-disabled .pokemon-image {
     max-width: 10vw;
   }
 
@@ -923,4 +936,40 @@ td.range-slide {
   40%, 60% {
     transform: translate3d(3px, 0, 0);
   }
+}
+
+.app-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex: 1;
+  padding: 20px;
+}
+
+/* Styles pour les messages d'erreur */
+.error-message {
+  color: #d32f2f;
+  background-color: #ffebee;
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+/* Styles pour les messages de succès */
+.success-message {
+  color: #388e3c;
+  background-color: #e8f5e9;
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+/* Styles pour les conteneurs */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
 }
