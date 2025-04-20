@@ -3,9 +3,19 @@
   justify-content: space-between;
   align-items: center;
   background-color: #3c5aa6;
-  padding: 15px 30px;
+  padding: 12px 20px;
   color: white;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-sizing: border-box;
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center;
 }
 
 .navbar-logo a {
@@ -14,6 +24,7 @@
   font-weight: bold;
   text-decoration: none;
   transition: color 0.3s;
+  margin-right: 30px;
 }
 
 .navbar-logo a:hover {
@@ -28,7 +39,7 @@
 }
 
 .navbar-item {
-  margin: 0 15px;
+  margin: 0 10px;
 }
 
 .navbar-link {
@@ -37,7 +48,7 @@
   font-size: 16px;
   transition: color 0.3s;
   position: relative;
-  padding-bottom: 5px;
+  padding-bottom: 3px;
 }
 
 .navbar-link:hover {
@@ -59,6 +70,32 @@
   width: 100%;
 }
 
+.navbar-center {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.wtp-navbar-button {
+  background-color: #ffcb05;
+  color: #3c5aa6;
+  border: 2px solid #3c5aa6;
+  border-radius: 25px;
+  padding: 8px 18px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.wtp-navbar-button:hover {
+  background-color: #ffd74d;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
 .navbar-auth {
   display: flex;
   align-items: center;
@@ -70,7 +107,7 @@
 }
 
 .username {
-  margin-right: 15px;
+  margin-right: 10px;
   font-weight: 500;
 }
 
@@ -79,7 +116,7 @@
   color: white;
   border: none;
   border-radius: 4px;
-  padding: 8px 15px;
+  padding: 6px 12px;
   cursor: pointer;
   transition: background-color 0.3s;
 }
@@ -90,11 +127,11 @@
 
 .login-links {
   display: flex;
-  gap: 10px;
+  gap: 8px;
 }
 
 .login-button, .register-button {
-  padding: 8px 15px;
+  padding: 6px 12px;
   text-decoration: none;
   border-radius: 4px;
   transition: all 0.3s;
@@ -120,21 +157,165 @@
   background-color: rgba(255, 255, 255, 0.1);
 }
 
+.navbar-link.favorites-link {
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  color: white;
+  text-decoration: none;
+  padding-bottom: 3px;
+  position: relative;
+  transition: color 0.3s;
+}
+
+.navbar-link.favorites-link:hover {
+  color: #ffcb05;
+}
+
+.navbar-link.favorites-link::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #ffcb05;
+  transition: width 0.3s;
+}
+
+.navbar-link.favorites-link:hover::after {
+  width: 100%;
+}
+
+.navbar-link.favorites-link.active {
+  color: #ffcb05;
+}
+
+.navbar-link.favorites-link.active::after {
+  width: 100%;
+}
+
+/* Responsive styles for medium screens */
+@media (max-width: 900px) {
+  .navbar {
+    padding: 10px 15px;
+  }
+  
+  .navbar-logo a {
+    margin-right: 15px;
+  }
+  
+  .navbar-item {
+    margin: 0 8px;
+  }
+  
+  .username {
+    margin-right: 8px;
+  }
+  
+  .wtp-navbar-button {
+    font-size: 14px;
+    padding: 6px 14px;
+  }
+}
+
+/* Responsive styles for tablets */
 @media (max-width: 768px) {
   .navbar {
-    flex-direction: column;
-    padding: 15px;
+    flex-wrap: wrap;
+    padding: 10px;
   }
-
+  
+  .navbar-left {
+    order: 1;
+    width: 100%;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  
+  .navbar-center {
+    order: 3;
+    position: relative;
+    left: auto;
+    transform: none;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+  }
+  
+  .navbar-auth {
+    order: 2;
+    width: auto;
+  }
+  
+  .navbar-logo {
+    margin-bottom: 0;
+  }
+  
   .navbar-links {
-    margin: 15px 0;
+    width: auto;
+  }
+  
+  .navbar-item {
+    margin: 0 8px;
+  }
+  
+  .wtp-navbar-button {
+    width: 100%;
+    max-width: 300px;
+  }
+}
+
+/* Responsive styles for mobile devices */
+@media (max-width: 480px) {
+  .navbar-left {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .navbar-logo {
+    margin-bottom: 10px;
+    width: 100%;
+    text-align: center;
+  }
+  
+  .navbar-logo a {
+    margin-right: 0;
+  }
+  
+  .navbar-links {
     width: 100%;
     justify-content: center;
   }
-
+  
   .navbar-auth {
     width: 100%;
     justify-content: center;
-    margin-top: 10px;
+  }
+  
+  .login-links {
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    width: 100%;
+  }
+  
+  .login-button, .register-button, .logout-button {
+    width: 100%;
+    text-align: center;
+    padding: 8px;
+  }
+  
+  .user-menu {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .username {
+    margin-right: 0;
+    margin-bottom: 8px;
   }
 } 

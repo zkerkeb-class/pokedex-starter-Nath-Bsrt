@@ -5,6 +5,7 @@ import { useAuth } from "../context/AuthContext";
 import { typeImages } from "../assets/typeImages"; // Import des images de types
 import "../App.css";
 import "./wtp.css";
+import Navbar from "../components/Navbar"; // Import de la Navbar
 
 // URL de la musique du jeu (Remplacé par une URL plus fiable)
 const POKEMON_MUSIC_URL = "https://play.pokemonshowdown.com/audio/dpp-trainer.mp3";
@@ -13,7 +14,7 @@ const POKEMON_MUSIC_URL = "https://play.pokemonshowdown.com/audio/dpp-trainer.mp
 const GAME_DURATION = 60;
 
 function WhosThatPokemon() {
-  const { isAuthenticated, user, token } = useAuth();
+  const { isAuthenticated, currentUser, logout, token } = useAuth();
   const navigate = useNavigate();
   const [pokemons, setPokemons] = useState([]);
   const [currentPokemon, setCurrentPokemon] = useState(null);
@@ -29,6 +30,13 @@ function WhosThatPokemon() {
   const [showLeaderboard, setShowLeaderboard] = useState(false);
   const audioRef = useRef(null);
   const timerRef = useRef(null);
+  // Dummy state pour la navbar
+  const [showFavorites, setShowFavorites] = useState(false);
+
+  // Fonction dummy pour la navbar
+  const toggleFavorites = () => {
+    navigate('/');
+  };
 
   // Vérifier si l'utilisateur est authentifié
   useEffect(() => {
@@ -225,150 +233,159 @@ function WhosThatPokemon() {
   };
 
   return (
-    <div className="wtp-container">
-      <h1>Qui est ce Pokémon?</h1>
-      
-      {/* Lecteur audio (caché) */}
-      <audio ref={audioRef} src={POKEMON_MUSIC_URL} loop />
-      
-      {/* Bouton de contrôle de la musique */}
-      <div className="music-control">
-        <button 
-          className={`music-button ${musicPlaying ? 'playing' : ''}`}
-          onClick={toggleMusic}
-        >
-          {musicPlaying ? '🔊 Couper la musique' : '🔈 Jouer la musique'}
-        </button>
-      </div>
-      
-      {gameOver ? (
-        <div className="game-over">
-          <h2>Fin de la partie!</h2>
-          <p>Votre score: {score}</p>
-          <p>Pokémon identifiés: {pokemonCaught}</p>
-          <button onClick={startGame}>Rejouer</button>
-          <button onClick={toggleLeaderboard}>
-            {showLeaderboard ? 'Cacher le leaderboard' : 'Voir le leaderboard'}
+    <>
+      <Navbar
+        user={currentUser}
+        logout={logout}
+        showFavorites={showFavorites}
+        toggleFavorites={toggleFavorites}
+        isWTPPage={true}
+      />
+      <div className="wtp-container">
+        <h1>Qui est ce Pokémon?</h1>
+        
+        {/* Lecteur audio (caché) */}
+        <audio ref={audioRef} src={POKEMON_MUSIC_URL} loop />
+        
+        {/* Bouton de contrôle de la musique */}
+        <div className="music-control">
+          <button 
+            className={`music-button ${musicPlaying ? 'playing' : ''}`}
+            onClick={toggleMusic}
+          >
+            {musicPlaying ? '🔊 Couper la musique' : '🔈 Jouer la musique'}
           </button>
-          <button onClick={() => navigate("/")}>Retour à l'accueil</button>
-          
-          {showLeaderboard && (
-            <div className="leaderboard">
-              <h3>Meilleurs Scores</h3>
-              <table>
-                <thead>
-                  <tr>
-                    <th>Rang</th>
-                    <th>Joueur</th>
-                    <th>Score</th>
-                    <th>Parties</th>
-                    <th>Pokémon capturés</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {leaderboard.map((player, index) => (
-                    <tr key={player._id} className={player.username === user?.username ? 'current-user' : ''}>
-                      <td>{index + 1}</td>
-                      <td>{player.username}</td>
-                      <td>{player.highScore}</td>
-                      <td>{player.gamesPlayed}</td>
-                      <td>{player.pokemonCaught}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          )}
         </div>
-      ) : !isGameActive ? (
-        <div className="game-start">
-          <h2>Prêt à jouer?</h2>
-          <p>Identifiez autant de Pokémon que possible en {GAME_DURATION} secondes!</p>
-          <button onClick={startGame} className="start-button">Commencer la partie</button>
-          <button onClick={toggleLeaderboard} className="leaderboard-button">
-            {showLeaderboard ? 'Cacher le leaderboard' : 'Voir le leaderboard'}
-          </button>
-          
-          {showLeaderboard && (
-            <div className="leaderboard">
-              <h3>Meilleurs Scores</h3>
-              <table>
-                <thead>
-                  <tr>
-                    <th>Rang</th>
-                    <th>Joueur</th>
-                    <th>Score</th>
-                    <th>Parties</th>
-                    <th>Pokémon capturés</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {leaderboard.map((player, index) => (
-                    <tr key={player._id} className={player.username === user?.username ? 'current-user' : ''}>
-                      <td>{index + 1}</td>
-                      <td>{player.username}</td>
-                      <td>{player.highScore}</td>
-                      <td>{player.gamesPlayed}</td>
-                      <td>{player.pokemonCaught}</td>
+        
+        {gameOver ? (
+          <div className="game-over">
+            <h2>Fin de la partie!</h2>
+            <p>Votre score: {score}</p>
+            <p>Pokémon identifiés: {pokemonCaught}</p>
+            <button onClick={startGame}>Rejouer</button>
+            <button onClick={toggleLeaderboard}>
+              {showLeaderboard ? 'Cacher le leaderboard' : 'Voir le leaderboard'}
+            </button>
+            <button onClick={() => navigate("/")}>Retour à l'accueil</button>
+            
+            {showLeaderboard && (
+              <div className="leaderboard">
+                <h3>Meilleurs Scores</h3>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Rang</th>
+                      <th>Joueur</th>
+                      <th>Score</th>
+                      <th>Parties</th>
+                      <th>Pokémon capturés</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          )}
-        </div>
-      ) : (
-        <>
-          <div className="game-header">
-            <div className="score-display">Score: {score}</div>
-            <div className="timer-display">Temps: {formatTime(timeLeft)}</div>
-          </div>
-          
-          {currentPokemon && (
-            <div className="pokemon-display">
-              <div className={`pokemon-image ${revealed ? 'revealed' : 'silhouette'}`}>
-                <img 
-                  src={currentPokemon.image} 
-                  alt={revealed ? currentPokemon.name.french : "Silhouette de Pokémon"} 
-                />
+                  </thead>
+                  <tbody>
+                    {leaderboard.map((player, index) => (
+                      <tr key={player._id} className={player.username === currentUser?.username ? 'current-user' : ''}>
+                        <td>{index + 1}</td>
+                        <td>{player.username}</td>
+                        <td>{player.highScore}</td>
+                        <td>{player.gamesPlayed}</td>
+                        <td>{player.pokemonCaught}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               </div>
-              
-              {revealed && (
-                <div className="pokemon-name">
-                  <p>C'est {currentPokemon.name.french}!</p>
-                  <div className="revealed-types">
-                    {currentPokemon.type && currentPokemon.type.map((type) => (
-                      <div key={type} className="revealed-type-container">
-                        <img 
-                          src={typeImages[type]} 
-                          alt={type} 
-                          className="revealed-type-icon" 
-                        />
-                        <span className="revealed-type-name">{type}</span>
-                      </div>
+            )}
+          </div>
+        ) : !isGameActive ? (
+          <div className="game-start">
+            <h2>Prêt à jouer?</h2>
+            <p>Identifiez autant de Pokémon que possible en {GAME_DURATION} secondes!</p>
+            <button onClick={startGame} className="start-button">Commencer la partie</button>
+            <button onClick={toggleLeaderboard} className="leaderboard-button">
+              {showLeaderboard ? 'Cacher le leaderboard' : 'Voir le leaderboard'}
+            </button>
+            
+            {showLeaderboard && (
+              <div className="leaderboard">
+                <h3>Meilleurs Scores</h3>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Rang</th>
+                      <th>Joueur</th>
+                      <th>Score</th>
+                      <th>Parties</th>
+                      <th>Pokémon capturés</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {leaderboard.map((player, index) => (
+                      <tr key={player._id} className={player.username === currentUser?.username ? 'current-user' : ''}>
+                        <td>{index + 1}</td>
+                        <td>{player.username}</td>
+                        <td>{player.highScore}</td>
+                        <td>{player.gamesPlayed}</td>
+                        <td>{player.pokemonCaught}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+          </div>
+        ) : (
+          <>
+            <div className="game-header">
+              <div className="score-display">Score: {score}</div>
+              <div className="timer-display">Temps: {formatTime(timeLeft)}</div>
+            </div>
+            
+            {currentPokemon && (
+              <div className="pokemon-display">
+                <div className={`pokemon-image ${revealed ? 'revealed' : 'silhouette'}`}>
+                  <img 
+                    src={currentPokemon.image} 
+                    alt={revealed ? currentPokemon.name.french : "Silhouette de Pokémon"} 
+                  />
+                </div>
+                
+                {revealed && (
+                  <div className="pokemon-name">
+                    <p>C'est {currentPokemon.name.french}!</p>
+                    <div className="revealed-types">
+                      {currentPokemon.type && currentPokemon.type.map((type) => (
+                        <div key={type} className="revealed-type-container">
+                          <img 
+                            src={typeImages[type]} 
+                            alt={type} 
+                            className="revealed-type-icon" 
+                          />
+                          <span className="revealed-type-name">{type}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+                
+                {!revealed && (
+                  <div className="options-container">
+                    {options.map((pokemon) => (
+                      <button 
+                        key={pokemon.id} 
+                        onClick={() => checkAnswer(pokemon)}
+                        className="option-button"
+                      >
+                        {pokemon.name.french}
+                      </button>
                     ))}
                   </div>
-                </div>
-              )}
-              
-              {!revealed && (
-                <div className="options-container">
-                  {options.map((pokemon) => (
-                    <button 
-                      key={pokemon.id} 
-                      onClick={() => checkAnswer(pokemon)}
-                      className="option-button"
-                    >
-                      {pokemon.name.french}
-                    </button>
-                  ))}
-                </div>
-              )}
-            </div>
-          )}
-        </>
-      )}
-    </div>
+                )}
+              </div>
+            )}
+          </>
+        )}
+      </div>
+    </>
   );
 }
 

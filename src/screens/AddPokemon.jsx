@@ -2,9 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './AddPokemon.css';
 import Navbar from '../components/Navbar';
+import { useAuth } from '../context/AuthContext';
 
 const AddPokemon = () => {
   const navigate = useNavigate();
+  const { currentUser, logout } = useAuth();
   const [types, setTypes] = useState([]);
   const [formData, setFormData] = useState({
     name: '',
@@ -22,6 +24,13 @@ const AddPokemon = () => {
   });
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+  // Dummy state pour la navbar
+  const [showFavorites, setShowFavorites] = useState(false);
+
+  // Fonction dummy pour la navbar
+  const toggleFavorites = () => {
+    navigate('/');
+  };
 
   useEffect(() => {
     // Charger les types disponibles
@@ -89,14 +98,21 @@ const AddPokemon = () => {
     setIsSubmitting(true);
     
     try {
-      // Trouver le prochain ID disponible
-      const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=1&offset=1000');
-      const data = await response.json();
-      const newId = data.count + 1;
+      // Obtenir les Pokémon existants pour trouver le prochain ID disponible
+      const existingPokemon = JSON.parse(localStorage.getItem('customPokemon')) || [];
       
-      // Créer l'objet Pokémon
+      // Trouver l'ID maximum parmi les Pokémon existants et ajouter 10000
+      // pour éviter les conflits avec les Pokémon de l'API
+      let maxId = 10000; // ID de base pour les Pokémon personnalisés
+      
+      if (existingPokemon.length > 0) {
+        const maxExistingId = Math.max(...existingPokemon.map(p => p.id));
+        maxId = Math.max(maxId, maxExistingId + 1);
+      }
+      
+      // Créer l'objet Pokémon au format compatible avec l'API
       const newPokemon = {
-        id: newId,
+        id: maxId,
         name: formData.name.toLowerCase(),
         height: parseInt(formData.height, 10),
         weight: parseInt(formData.weight, 10),
@@ -121,13 +137,12 @@ const AddPokemon = () => {
         }
       };
       
-      // Dans un environnement réel, vous enverriez cela à votre API
       console.log('Nouveau Pokémon créé:', newPokemon);
       
-      // Stockage dans localStorage pour la démonstration
-      const existingPokemon = JSON.parse(localStorage.getItem('customPokemon')) || [];
+      // Stockage dans localStorage
       localStorage.setItem('customPokemon', JSON.stringify([...existingPokemon, newPokemon]));
       
+      // Afficher un message de succès et revenir à la page d'accueil
       alert('Pokémon ajouté avec succès!');
       navigate('/');
     } catch (error) {
@@ -139,8 +154,13 @@ const AddPokemon = () => {
   };
 
   return (
-    <div>
-      <Navbar />
+    <>
+      <Navbar 
+        showFavorites={showFavorites}
+        toggleFavorites={toggleFavorites}
+        user={currentUser}
+        logout={logout}
+      />
       <div className="add-pokemon-container">
         <h1 className="add-pokemon-title">Ajouter un nouveau Pokémon</h1>
         
@@ -377,7 +397,7 @@ const AddPokemon = () => {
           </div>
         </form>
       </div>
-    </div>
+    </>
   );
 };
 
