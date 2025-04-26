@@ -23,6 +23,7 @@ function WhosThatPokemon() {
   const [score, setScore] = useState(0);
   const [gameOver, setGameOver] = useState(false);
   const [musicPlaying, setMusicPlaying] = useState(false);
+  const [volume, setVolume] = useState(0.5); // Ajout d'un état pour le volume (50% par défaut)
   const [timeLeft, setTimeLeft] = useState(GAME_DURATION);
   const [isGameActive, setIsGameActive] = useState(false);
   const [pokemonCaught, setPokemonCaught] = useState(0);
@@ -89,9 +90,12 @@ function WhosThatPokemon() {
     };
   }, [timeLeft, isGameActive]);
 
-  // Gérer la lecture/pause de la musique
+  // Gérer la lecture/pause de la musique et le volume
   useEffect(() => {
     if (audioRef.current) {
+      // Appliquer le volume
+      audioRef.current.volume = volume;
+      
       if (musicPlaying) {
         audioRef.current.play().catch(err => {
           console.error("Erreur lors de la lecture de l'audio:", err);
@@ -109,7 +113,16 @@ function WhosThatPokemon() {
         audioRef.current.currentTime = 0;
       }
     };
-  }, [musicPlaying]);
+  }, [musicPlaying, volume]);
+
+  // Fonction pour changer le volume
+  const handleVolumeChange = (e) => {
+    const newVolume = parseFloat(e.target.value);
+    setVolume(newVolume);
+    if (audioRef.current) {
+      audioRef.current.volume = newVolume;
+    }
+  };
 
   // Fonction pour obtenir un pokémon aléatoire
   const getRandomPokemon = () => {
@@ -210,6 +223,7 @@ function WhosThatPokemon() {
     // Si on active la musique, tentons de la jouer et affichons un message d'erreur si cela échoue
     if (!musicPlaying) {
       if (audioRef.current) {
+        audioRef.current.volume = volume; // Appliquer le volume actuel
         audioRef.current.play()
           .catch(err => {
             console.error("Erreur lors de la lecture de l'audio:", err);
@@ -247,7 +261,7 @@ function WhosThatPokemon() {
         {/* Lecteur audio (caché) */}
         <audio ref={audioRef} src={POKEMON_MUSIC_URL} loop />
         
-        {/* Bouton de contrôle de la musique */}
+        {/* Contrôles de la musique */}
         <div className="music-control">
           <button 
             className={`music-button ${musicPlaying ? 'playing' : ''}`}
@@ -255,6 +269,21 @@ function WhosThatPokemon() {
           >
             {musicPlaying ? '🔊 Couper la musique' : '🔈 Jouer la musique'}
           </button>
+          
+          {/* Contrôle du volume */}
+          <div className="volume-control">
+            <label htmlFor="volume">Volume:</label>
+            <input 
+              type="range" 
+              id="volume" 
+              min="0" 
+              max="1" 
+              step="0.1" 
+              value={volume} 
+              onChange={handleVolumeChange} 
+            />
+            <span>{Math.round(volume * 100)}%</span>
+          </div>
         </div>
         
         {gameOver ? (
@@ -352,18 +381,6 @@ function WhosThatPokemon() {
                 {revealed && (
                   <div className="pokemon-name">
                     <p>C'est {currentPokemon.name.french}!</p>
-                    <div className="revealed-types">
-                      {currentPokemon.type && currentPokemon.type.map((type) => (
-                        <div key={type} className="revealed-type-container">
-                          <img 
-                            src={typeImages[type]} 
-                            alt={type} 
-                            className="revealed-type-icon" 
-                          />
-                          <span className="revealed-type-name">{type}</span>
-                        </div>
-                      ))}
-                    </div>
                   </div>
                 )}
                 

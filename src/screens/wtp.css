@@ -13,6 +13,10 @@
 /* Styles pour le contrôle de la musique */
 .music-control {
   margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
 }
 
 .music-button {
@@ -33,6 +37,58 @@
   background-color: #3c5aa6;
   color: white;
   border-color: #ffcb05;
+}
+
+/* Styles pour le contrôle de volume */
+.volume-control {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: #f0f0f0;
+  padding: 8px 15px;
+  border-radius: 20px;
+  width: 280px;
+  margin: 0 auto;
+}
+
+.volume-control label {
+  font-weight: bold;
+  color: #3c5aa6;
+}
+
+.volume-control input[type="range"] {
+  flex-grow: 1;
+  height: 6px;
+  appearance: none;
+  background: #ddd;
+  border-radius: 3px;
+  outline: none;
+}
+
+.volume-control input[type="range"]::-webkit-slider-thumb {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  background: #ffcb05;
+  border: 2px solid #3c5aa6;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.volume-control input[type="range"]::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  background: #ffcb05;
+  border: 2px solid #3c5aa6;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.volume-control span {
+  min-width: 40px;
+  text-align: right;
+  font-weight: bold;
+  color: #3c5aa6;
 }
 
 /* Header du jeu avec score et chronomètre */

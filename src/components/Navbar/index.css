@@ -96,6 +96,42 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
+.navbar-center {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.compare-navbar-button {
+  background-color: #ffcb05;
+  color: #3c5aa6;
+  border: 2px solid #3c5aa6;
+  border-radius: 25px;
+  padding: 8px 18px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.compare-navbar-button:hover {
+  background-color: #ffd74d;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.wtp-navbar-button:disabled,
+.compare-navbar-button:disabled {
+  background-color: #ccc;
+  color: #666;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+  border-color: #999;
+}
+
 .navbar-auth {
   display: flex;
   align-items: center;

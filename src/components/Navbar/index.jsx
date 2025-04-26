@@ -8,6 +8,7 @@ const Navbar = ({
   showFavorites,
   toggleFavorites,
   isWTPPage = false,
+  isComparePage = false,
 }) => {
   const navigate = useNavigate();
 
@@ -17,6 +18,10 @@ const Navbar = ({
 
   const handleHomeClick = () => {
     navigate("/");
+  };
+
+  const handleCompareClick = () => {
+    navigate("/compare");
   };
 
   return (
@@ -32,8 +37,8 @@ const Navbar = ({
             </NavLink>
           </li>
           <li className="navbar-item">
-            <button 
-              className={`navbar-link favorites-link ${showFavorites ? "active" : ""}`} 
+            <button
+              className={`navbar-link favorites-link ${showFavorites ? "active" : ""}`}
               onClick={toggleFavorites}
             >
               Favoris
@@ -48,7 +53,14 @@ const Navbar = ({
           onClick={handleWTPClick}
           disabled={isWTPPage}
         >
-          Who's that Pokémon?
+          Who's that Pokemon?
+        </button>
+        <button
+          className="compare-navbar-button"
+          onClick={handleCompareClick}
+          disabled={isComparePage}
+        >
+          Comparer des Pokémon
         </button>
       </div>
 
