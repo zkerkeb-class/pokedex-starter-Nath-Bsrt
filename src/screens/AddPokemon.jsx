@@ -37,9 +37,9 @@ const AddPokemon = () => {
     fetch('https://pokeapi.co/api/v2/type')
       .then(response => response.json())
       .then(data => {
-        // Filtrer les types "unknown" et "shadow"
+        // Filtrer les types "unknown", "shadow" et "stellar"
         const filteredTypes = data.results.filter(
-          type => type.name !== 'unknown' && type.name !== 'shadow'
+          type => type.name !== 'unknown' && type.name !== 'shadow' && type.name !== 'stellar'
         );
         setTypes(filteredTypes);
       })
@@ -153,6 +153,29 @@ const AddPokemon = () => {
     }
   };
 
+  // Fonction pour obtenir l'ID du type à partir de son nom
+  const getTypeId = (typeName) => {
+    const typeMap = {
+      'normal': 1, 'fighting': 2, 'flying': 3, 'poison': 4, 'ground': 5,
+      'rock': 6, 'bug': 7, 'ghost': 8, 'steel': 9, 'fire': 10,
+      'water': 11, 'grass': 12, 'electric': 13, 'psychic': 14, 'ice': 15,
+      'dragon': 16, 'dark': 17, 'fairy': 18
+    };
+    return typeMap[typeName] || 1; // Retourne 1 (normal) par défaut si non trouvé
+  };
+
+  // Import dynamique des images de types
+  const getTypeImageUrl = (typeName) => {
+    try {
+      // Utiliser require pour importer dynamiquement l'image
+      const typeId = getTypeId(typeName);
+      return new URL(`../assets/types/${typeId}.png`, import.meta.url).href;
+    } catch (error) {
+      console.error(`Erreur lors du chargement de l'image pour le type ${typeName}:`, error);
+      return ''; // Retourner une chaîne vide en cas d'échec
+    }
+  };
+
   return (
     <>
       <Navbar 
@@ -226,11 +249,11 @@ const AddPokemon = () => {
                   />
                   <label htmlFor={`type-${type.name}`}>
                     <img 
-                      src={`/types/${type.name}.svg`} 
+                      src={getTypeImageUrl(type.name)} 
                       alt={type.name} 
                       className="type-icon"
+                      title={type.name.charAt(0).toUpperCase() + type.name.slice(1)}
                     />
-                    <span>{type.name.charAt(0).toUpperCase() + type.name.slice(1)}</span>
                   </label>
                 </div>
               ))}
