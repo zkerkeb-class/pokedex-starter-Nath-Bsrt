@@ -1,11 +1,11 @@
 import { useParams, useNavigate } from "react-router";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { typeImages } from "../assets/typeImages"; // Import des images de types
-import Navbar from "../components/Navbar"; // Import de la navbar
-import { useAuth } from "../context/AuthContext"; // Importer useAuth
+import { typeImages } from "../../assets/typeImages"; // Import des images de types
+import Navbar from "../../components/Navbar"; // Import de la navbar
+import { useAuth } from "../../context/AuthContext"; // Importer useAuth
 import "./pokemon.css"; // Import du CSS
-import getEvolutionChain from "../data/evolution-chains"; // Import des chaînes d'évolution
+import getEvolutionChain from "../../data/evolution-chains"; // Import des chaînes d'évolution
 
 const Pokemon = () => {
     const { id } = useParams();

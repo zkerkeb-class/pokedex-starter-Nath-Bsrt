@@ -322,35 +322,3 @@
 .type-steel { background-color: #B8B8D0; }
 .type-fairy { background-color: #EE99AC; }
 
-/* Responsive styles */
-@media (max-width: 768px) {
-  .pokemon-selectors {
-    flex-direction: column;
-  }
-  
-  .pokemon-selector {
-    width: 100%;
-  }
-  
-  .pokemon-cards {
-    flex-direction: column;
-  }
-  
-  .pokemon-card {
-    width: 100%;
-    margin-bottom: 20px;
-  }
-  
-  .versus {
-    margin: 10px 0;
-  }
-  
-  .advantage-columns {
-    flex-direction: column;
-  }
-  
-  .advantage-column {
-    width: 100%;
-    margin-bottom: 20px;
-  }
-} 

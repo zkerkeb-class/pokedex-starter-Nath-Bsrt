@@ -24,7 +24,7 @@ const PokemonCompare = () => {
     setShowFavorites(!showFavorites);
   };
 
-  // Fetch all Pokemon on component mount
+  // Récupération de tous les Pokémon lors du montage du composant
   useEffect(() => {
     const fetchPokemon = async () => {
       try {
@@ -39,7 +39,7 @@ const PokemonCompare = () => {
     fetchPokemon();
   }, []);
 
-  // Type effectiveness data
+  // Données d'efficacité des types
   const typeEffectiveness = {
     normal: { weaknesses: ['fighting'], resistances: [], immunities: ['ghost'] },
     fire: { weaknesses: ['water', 'ground', 'rock'], resistances: ['fire', 'grass', 'ice', 'bug', 'steel', 'fairy'], immunities: [] },
@@ -61,7 +61,7 @@ const PokemonCompare = () => {
     fairy: { weaknesses: ['poison', 'steel'], resistances: ['fighting', 'bug', 'dark'], immunities: ['dragon'] },
   };
 
-  // Fetch Pokemon data when selections change
+  // Récupération des données des Pokémon lorsque les sélections changent
   useEffect(() => {
     const fetchPokemonData = async () => {
       if (selectedPokemon1) {
@@ -94,7 +94,7 @@ const PokemonCompare = () => {
     fetchPokemonData();
   }, [selectedPokemon2]);
 
-  // Handle comparison
+  // Gestion de la comparaison
   const handleCompare = () => {
     if (!selectedPokemon1 || !selectedPokemon2 || !pokemon1Data || !pokemon2Data) {
       setError('Veuillez sélectionner deux Pokémon à comparer.');
@@ -105,7 +105,7 @@ const PokemonCompare = () => {
     setError(null);
 
     try {
-      // Compare stats
+      // Comparaison des statistiques
       const statsComparison = {
         hp: { 
           pokemon1: pokemon1Data.stats.hp, 
@@ -145,7 +145,7 @@ const PokemonCompare = () => {
         }
       };
 
-      // Calculate total stats
+      // Calcul des statistiques totales
       const total1 = Object.values(pokemon1Data.stats).reduce((sum, stat) => sum + stat, 0);
       const total2 = Object.values(pokemon2Data.stats).reduce((sum, stat) => sum + stat, 0);
       
@@ -156,7 +156,7 @@ const PokemonCompare = () => {
                 total1 < total2 ? pokemon2Data.name.french : 'Égalité'
       };
 
-      // Analyze type advantages
+      // Analyse des avantages de types
       const typeAdvantage = analyzeTypeAdvantages(
         pokemon1Data.types,
         pokemon2Data.types,
@@ -164,7 +164,7 @@ const PokemonCompare = () => {
         pokemon2Data.name.french
       );
 
-      // Set comparison result
+      // Définition du résultat de la comparaison
       setComparisonResult({
         pokemon1: pokemon1Data,
         pokemon2: pokemon2Data,
@@ -181,18 +181,18 @@ const PokemonCompare = () => {
     }
   };
 
-  // Analyze type advantages between two Pokemon
+  // Analyse des avantages de types entre deux Pokémon
   const analyzeTypeAdvantages = (types1, types2, name1, name2) => {
     const advantage = {
       pokemon1: { effective: [], ineffective: [], immune: [] },
       pokemon2: { effective: [], ineffective: [], immune: [] }
     };
 
-    // Convert types to lowercase for comparison
+    // Conversion des types en minuscules pour la comparaison
     const pokemon1Types = types1.map(t => t.toLowerCase());
     const pokemon2Types = types2.map(t => t.toLowerCase());
 
-    // Check Pokemon 1's offensive advantages against Pokemon 2
+    // Vérification des avantages offensifs du Pokémon 1 contre le Pokémon 2
     pokemon1Types.forEach(attackType => {
       pokemon2Types.forEach(defenseType => {
         const effectiveness = typeEffectiveness[defenseType];
@@ -208,7 +208,7 @@ const PokemonCompare = () => {
       });
     });
 
-    // Check Pokemon 2's offensive advantages against Pokemon 1
+    // Vérification des avantages offensifs du Pokémon 2 contre le Pokémon 1
     pokemon2Types.forEach(attackType => {
       pokemon1Types.forEach(defenseType => {
         const effectiveness = typeEffectiveness[defenseType];
@@ -227,9 +227,9 @@ const PokemonCompare = () => {
     return advantage;
   };
 
-  // Determine overall winner based on stats and type advantages
+  // Détermination du vainqueur global basé sur les statistiques et les avantages de types
   const determineOverallWinner = (statsComparison, typeAdvantage, name1, name2) => {
-    // Count stat wins
+    // Comptage des victoires statistiques
     let stat1Wins = 0;
     let stat2Wins = 0;
 
@@ -238,11 +238,11 @@ const PokemonCompare = () => {
       else if (comparison.winner === name2) stat2Wins++;
     });
 
-    // Count type advantages
+    // Comptage des avantages de types
     const type1Advantage = typeAdvantage.pokemon1.effective.length - typeAdvantage.pokemon1.ineffective.length - typeAdvantage.pokemon1.immune.length;
     const type2Advantage = typeAdvantage.pokemon2.effective.length - typeAdvantage.pokemon2.ineffective.length - typeAdvantage.pokemon2.immune.length;
 
-    // Determine overall winner
+    // Détermination du vainqueur global
     if (stat1Wins > stat2Wins && type1Advantage >= type2Advantage) {
       return { winner: name1, reason: `${name1} a de meilleures statistiques et des avantages de type.` };
     } else if (stat2Wins > stat1Wins && type2Advantage >= type1Advantage) {

@@ -97,49 +97,6 @@
   transform: scale(1.05);
 }
 
-@media (max-width: 768px) {
-  .search-input {
-    padding: 10px 15px 10px 35px;
-    font-size: 14px;
-  }
-  
-  .search-icon {
-    left: 10px;
-    font-size: 16px;
-  }
-  
-  .types-filter {
-    grid-template-columns: repeat(6, 1fr); /* 6 types par ligne sur tablette */
-  }
-  
-  .type-icon {
-    width: 70px !important;
-    height: 26px !important;
-  }
-}
-
-@media (max-width: 480px) {
-  .search-input {
-    padding: 8px 12px 8px 30px;
-    font-size: 13px;
-  }
-  
-  .search-icon {
-    left: 8px;
-    font-size: 14px;
-  }
-  
-  .types-filter {
-    grid-template-columns: repeat(4, 1fr); /* 4 types par ligne sur mobile */
-    gap: 8px;
-  }
-  
-  .type-icon {
-    width: 60px !important;
-    height: 22px !important;
-  }
-}
-
 .types-filter-container {
     margin-bottom: 25px;
 }

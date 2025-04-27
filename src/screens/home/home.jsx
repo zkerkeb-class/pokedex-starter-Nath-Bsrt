@@ -1,11 +1,11 @@
 import "./home.css";
 import axios from "axios";
-import PokemonCard from "../components/pokemonCard";
-import SearchBar from "../components/searchBar";
-import Navbar from "../components/Navbar";
+import PokemonCard from "../../components/pokemonCard";
+import SearchBar from "../../components/searchBar";
+import Navbar from "../../components/Navbar";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";  // Importer 'useNavigate'
-import { useAuth } from "../context/AuthContext";  // Importer 'useAuth'
+import { useAuth } from "../../context/AuthContext";  // Importer 'useAuth'
 
 function App() {
   const { isAuthenticated, currentUser, logout } = useAuth();  // Récupérer l'état d'authentification et les fonctions
